@@ -1,0 +1,37 @@
+{
+  "name": "nypb",
+  "version": "1.0.0",
+  "description": "Use bun, pnpm, yarn, or npm to execute a command",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CosmoCreeper/nypb.git"
+  },
+  "author": "CosmoCreeper",
+  "keywords": [
+    "bun",
+    "pnpm",
+    "yarn",
+    "npm",
+    "spawn",
+    "command"
+  ],
+  "bin": {
+    "nypb": "bin/index.js"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "bin/"
+  ],
+  "dependencies": {
+    "cross-spawn": "^7.0.6",
+    "package-directory": "^8.2.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.2"
+  }
+}
