@@ -21,7 +21,7 @@ function hasManager(name) {
 function getPkgManager() {
   if (cachedClient !== undefined) return cachedClient;
 
-  const pkgRoot = pkgDir.sync();
+  const pkgRoot = pkgDir.packageDirectorySync();
   if (pkgRoot) {
     const pkgManagers = [
       ["bun", "bun.lock"],
