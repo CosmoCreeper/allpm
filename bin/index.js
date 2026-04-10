@@ -1,10 +1,10 @@
 #! /usr/bin/env node
 "use strict";
 
-const nypb = require("../index");
+const allpm = require("../index");
 // Execute the command
 try {
-  const status = nypb.spawn.sync(process.argv.slice(2), { stdio: "inherit" }).status;
+  const status = allpm.spawn.sync(process.argv.slice(2), { stdio: "inherit" }).status;
   process.exit(status);
 } catch (err) {
   console.log(err);

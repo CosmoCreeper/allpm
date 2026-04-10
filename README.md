@@ -1,15 +1,15 @@
-# nypb
+# allpm
 
 Execute scripts with bun, pnpm, yarn, or npm.
 
 ```sh
-bun install -d nypb
+bun install -d allpm
 # or
-pnpm install -D nypb
+pnpm install -D allpm
 # or
-yarn add -D nypb
+yarn add -D allpm
 # or
-npm i --save-dev nypb
+npm i --save-dev allpm
 ```
 
 The client is determined by a series of ordered checks:
@@ -26,7 +26,7 @@ The client is determined by a series of ordered checks:
 ## Module
 
 ```js
-import getPkgManager, { spawn, hasBun, hasPnpm, hasYarn, hasNpm } from "nypb";
+import getPkgManager, { spawn, hasBun, hasPnpm, hasYarn, hasNpm } from "allpm";
 
 // String of `bun`, `pnpm`, `yarn`, or `npm` returned
 console.log(getPkgManager());
@@ -34,7 +34,7 @@ console.log(getPkgManager());
 // Boolean values for hasBun, hasPnpm, hasYarn, hasNpm
 console.log(hasBun());
 
-// Spawn nypb command
+// Spawn allpm command
 spawn(["init"]);
 
 // Spawn sync option
@@ -44,23 +44,23 @@ spawn.sync(["init"], { stdio: "inherit" });
 Under the covers, there are cached lookup values being used for efficiency. These can be manually cleared:
 
 ```js
-import nypb from "nypb";
+import allpm from "allpm";
 import { spawnSync } from "child_process";
 
-console.log(nypb.hasBun()); // false
+console.log(allpm.hasBun()); // false
 
 spawnSync("npm", ["i", "-g", "yarn"], { stdio: "inherit" });
 
-console.log(nypb.hasBun()); // false (cached)
+console.log(allpm.hasBun()); // false (cached)
 
-nypb.clearCache();
-console.log(nypb.hasBun()); // true
+allpm.clearCache();
+console.log(allpm.hasBun()); // true
 ```
 
 ## CLI
 
 ```sh
-nypb <command>
+allpm <command>
 ```
 
 ## Package
@@ -71,12 +71,12 @@ Modules with bin files can be called directly in `package.json` scripts:
 {
   "devDependencies": {
     ...
-    "nypb": "^1.0.0"
+    "allpm": "^1.0.0"
   },
   "scripts": {
     "compile": "babel src --out-dir dist",
     "lint": "eslint .",
-    "prepublish": "nypb run lint && nypb run compile"
+    "prepublish": "allpm run lint && allpm run compile"
   }
 }
 ```

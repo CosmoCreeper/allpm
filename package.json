@@ -1,5 +1,5 @@
 {
-  "name": "nypb",
+  "name": "allpm",
   "version": "1.0.0",
   "description": "Use bun, pnpm, yarn, or npm to execute a command",
   "license": "MIT",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:CosmoCreeper/nypb.git"
+    "url": "git@github.com:CosmoCreeper/allpm.git"
   },
   "author": "CosmoCreeper",
   "keywords": [
@@ -20,7 +20,7 @@
     "command"
   ],
   "bin": {
-    "nypb": "bin/index.js"
+    "allpm": "bin/index.js"
   },
   "main": "index.js",
   "files": [
