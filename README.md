@@ -1,32 +1,40 @@
-# yarn-or-npm
+# nypb
 
-Execute scripts with Yarn or npm.
+Execute scripts with bun, pnpm, yarn, or npm.
 
 ```sh
-yarn add -D yarn-or-npm
+bun install -d nypb
 # or
-npm i --save-dev yarn-or-npm
+pnpm install -D nypb
+# or
+yarn add -D nypb
+# or
+npm i --save-dev nypb
 ```
 
 The client is determined by a series of ordered checks:
 
+1. `bun.lock` file is in the nearest package directory - **bun**
+1. `pnpm-lock.yaml` file is in the nearest package directory - **pnpm**
 1. `yarn.lock` file is in the nearest package directory - **yarn**
 1. `package-lock.json` file is in the nearest package directory - **npm**
+1. `bun` is installed - **bun**
+1. `pnpm` is installed - **pnpm**
 1. `yarn` is installed - **yarn**
 1. Fallback - **npm**
 
 ## Module
 
 ```js
-import yarnOrNpm, { spawn, hasYarn, hasNpm } from "yarn-or-npm";
+import getPkgManager, { spawn, hasBun, hasPnpm, hasYarn, hasNpm } from "nypb";
 
-// String of `yarn` or `npm` returned
-console.log(yarnOrNpm());
+// String of `bun`, `pnpm`, `yarn`, or `npm` returned
+console.log(getPkgManager());
 
-// Boolean values for hasYarn, hasNpm
-console.log(hasYarn());
+// Boolean values for hasBun, hasPnpm, hasYarn, hasNpm
+console.log(hasBun());
 
-// Spawn yarn or npm command
+// Spawn nypb command
 spawn(["init"]);
 
 // Spawn sync option
@@ -36,25 +44,23 @@ spawn.sync(["init"], { stdio: "inherit" });
 Under the covers, there are cached lookup values being used for efficiency. These can be manually cleared:
 
 ```js
-import yarnOrNpm from "yarn-or-npm";
+import nypb from "nypb";
 import { spawnSync } from "child_process";
 
-console.log(yarnOrNpm.hasYarn()); // false
+console.log(nypb.hasBun()); // false
 
 spawnSync("npm", ["i", "-g", "yarn"], { stdio: "inherit" });
 
-console.log(yarnOrNpm.hasYarn()); // false (cached)
+console.log(nypb.hasBun()); // false (cached)
 
-yarnOrNpm.clearCache();
-console.log(yarnOrNpm.hasYarn()); // true
+nypb.clearCache();
+console.log(nypb.hasBun()); // true
 ```
 
 ## CLI
 
 ```sh
-yarn-or-npm <command>
-# Can also use `yon` shorthand
-yon <command>
+nypb <command>
 ```
 
 ## Package
@@ -65,12 +71,12 @@ Modules with bin files can be called directly in `package.json` scripts:
 {
   "devDependencies": {
     ...
-    "yarn-or-npm": "^1.0.0"
+    "nypb": "^1.0.0"
   },
   "scripts": {
     "compile": "babel src --out-dir dist",
     "lint": "eslint .",
-    "prepublish": "yarn-or-npm run lint && yarn-or-npm run compile"
+    "prepublish": "nypb run lint && nypb run compile"
   }
 }
 ```
