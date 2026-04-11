@@ -3,6 +3,10 @@
   "version": "1.0.1",
   "description": "Use bun, pnpm, yarn, or npm to execute a command",
   "license": "MIT",
+  "scripts": {
+    "lint": "eslint bin/ index.js && prettier . --check --cache",
+    "lint:fix": "eslint bin/ index.js --fix && prettier . --write"
+  },
   "engines": {
     "node": ">=8.6.0"
   },
@@ -28,7 +32,12 @@
     "bin/"
   ],
   "dependencies": {
+    "@eslint/js": "^10.0.1",
+    "@eslint/json": "^1.2.0",
     "cross-spawn": "^7.0.6",
+    "eslint": "^10.2.0",
+    "globals": "^17.4.0",
+    "husky": "^9.1.7",
     "package-directory": "^8.2.0"
   },
   "devDependencies": {

@@ -8,4 +8,3 @@ test("pkg manager check to be bun", () => {
 test("check for bun to be true", () => {
   expect(allpm.hasBun()).toBeTruthy();
 });
-

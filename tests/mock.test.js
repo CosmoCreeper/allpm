@@ -25,4 +25,3 @@ test("yarn to not exist", () => {
 test("npm to not exist", () => {
   expect(allpm.hasNpm()).toBeFalsy();
 });
-
