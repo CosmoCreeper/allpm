@@ -25,6 +25,7 @@ function getPkgManager() {
   if (pkgRoot) {
     const pkgManagers = [
       ["bun", "bun.lock"],
+      ["deno", "deno.lock"],
       ["pnpm", "pnpm-lock.yaml"],
       ["yarn", "yarn.lock"],
       ["npm", "package-lock.json"],
@@ -36,7 +37,7 @@ function getPkgManager() {
     if (detected) return (cachedClient = detected[0]);
   }
 
-  return (cachedClient = ["bun", "pnpm", "yarn"].find(hasManager) ?? "npm");
+  return (cachedClient = ["bun", "deno", "pnpm", "yarn"].find(hasManager) ?? "npm");
 }
 
 const spawn = (...args) => crossSpawn(getPkgManager(), ...args);
@@ -44,6 +45,7 @@ const spawnSync = (...args) => crossSpawn.sync(getPkgManager(), ...args);
 
 Object.assign(getPkgManager, {
   hasBun: () => hasManager("bun"),
+  hasDeno: () => hasManager("deno"),
   hasPnpm: () => hasManager("pnpm"),
   hasYarn: () => hasManager("yarn"),
   hasNpm: () => hasManager("npm"),

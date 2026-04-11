@@ -12,6 +12,10 @@ test("bun to not exist", () => {
   expect(allpm.hasBun()).toBeFalsy();
 });
 
+test("deno to not exist", () => {
+  expect(allpm.hasDeno()).toBeFalsy();
+});
+
 test("pnpm to not exist", () => {
   expect(allpm.hasPnpm()).toBeFalsy();
 });

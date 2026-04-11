@@ -5,6 +5,8 @@ Execute scripts with bun, pnpm, yarn, or npm.
 ```sh
 bun install -d allpm
 # or
+deno install -D npm:allpm
+# or
 pnpm install -D allpm
 # or
 yarn add -D allpm
@@ -15,10 +17,12 @@ npm i --save-dev allpm
 The client is determined by a series of ordered checks:
 
 1. `bun.lock` file is in the nearest package directory - **bun**
+1. `deno.lock` file is in the nearest package directory - **deno**
 1. `pnpm-lock.yaml` file is in the nearest package directory - **pnpm**
 1. `yarn.lock` file is in the nearest package directory - **yarn**
 1. `package-lock.json` file is in the nearest package directory - **npm**
 1. `bun` is installed - **bun**
+1. `deno` is installed - **deno**
 1. `pnpm` is installed - **pnpm**
 1. `yarn` is installed - **yarn**
 1. Fallback - **npm**
@@ -26,12 +30,12 @@ The client is determined by a series of ordered checks:
 ## Module
 
 ```js
-import getPkgManager, { spawn, hasBun, hasPnpm, hasYarn, hasNpm } from "allpm";
+import getPkgManager, { spawn, hasBun, hasDeno, hasPnpm, hasYarn, hasNpm } from "allpm";
 
-// String of `bun`, `pnpm`, `yarn`, or `npm` returned
+// String of `bun`, `deno`, `pnpm`, `yarn`, or `npm` returned
 console.log(getPkgManager());
 
-// Boolean values for hasBun, hasPnpm, hasYarn, hasNpm
+// Boolean values for hasBun, hasDeno, hasPnpm, hasYarn, hasNpm
 console.log(hasBun());
 
 // Spawn allpm command
