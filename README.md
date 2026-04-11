@@ -1,6 +1,6 @@
 # allpm
 
-Execute scripts with bun, pnpm, yarn, or npm.
+Execute scripts with bun, deno, pnpm, yarn, or npm.
 
 ```sh
 bun install -d allpm
