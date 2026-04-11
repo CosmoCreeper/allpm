@@ -1,7 +1,7 @@
 {
   "name": "allpm",
-  "version": "1.0.1",
-  "description": "Use bun, pnpm, yarn, or npm to execute a command",
+  "version": "1.0.2",
+  "description": "Use bun, deno, pnpm, yarn, or npm to execute a command",
   "license": "MIT",
   "scripts": {
     "lint": "eslint bin/ index.js && prettier . --check --cache",
