@@ -1,9 +1,7 @@
 const { mock, expect, test } = require("bun:test");
 
-mock.module("cross-spawn", () => ({
-  default: {
-    sync: mock(() => ({ stdout: null })),
-  },
+await mock.module("cross-spawn", () => ({
+  sync: mock(() => ({ stdout: null })),
 }));
 
 delete require.cache[require.resolve("../index")];

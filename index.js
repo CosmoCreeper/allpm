@@ -9,13 +9,13 @@ let cachedClient;
 const clearCache = () => cache.clear();
 
 function hasManager(name) {
-  if (name in cache) return cache[name];
+  if (cache.has(name)) return cache.get(name);
   try {
-    cache[name] = !!crossSpawn.sync(name, ["--version"]).stdout?.toString().trim();
+    cache.set(name, !!crossSpawn.sync(name, ["--version"]).stdout?.toString().trim());
   } catch {
-    cache[name] = false;
+    cache.set(name, false);
   }
-  return cache[name];
+  return cache.get(name);
 }
 
 function getPkgManager() {
