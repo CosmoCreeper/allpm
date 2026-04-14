@@ -2,6 +2,9 @@
   "compilerOptions": {
     "declaration": true,
     "emitDeclarationOnly": true,
-    "types": ["bun-types"]
-  }
+    "types": ["bun-types"],
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src/**/*"]
 }
