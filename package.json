@@ -1,6 +1,6 @@
 {
   "name": "allpm",
-  "version": "1.0.2",
+  "version": "1.1.3",
   "description": "Use bun, deno, pnpm, yarn, or npm to execute a command",
   "license": "MIT",
   "main": "./dist/index.js",
