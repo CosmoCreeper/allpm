@@ -6,7 +6,7 @@ on:
     types: [created]
 
 jobs:
-  publish-npm:
+  publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -20,8 +20,8 @@ jobs:
       - run: bun lint
       - run: bun test
       - run: bun run build
-      - run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: bun publish --provenance --access public
         env:
+          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
           HUSKY: 0
       - run: bunx jsr publish
