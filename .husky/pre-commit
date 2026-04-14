@@ -1,2 +1,4 @@
-bun run lint
+bun pretty
 bun test
+bun lint
+bun run build

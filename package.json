@@ -3,9 +3,22 @@
   "version": "1.0.2",
   "description": "Use bun, deno, pnpm, yarn, or npm to execute a command",
   "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
-    "lint": "eslint bin/ index.js && prettier . --check --cache",
-    "lint:fix": "eslint bin/ index.js --fix && prettier . --write"
+    "build": "bun run build:ts && bun run build:types",
+    "build:ts": "bun build src/ --outdir dist/ --target node",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist",
+    "lint": "eslint . && prettier . --check --cache",
+    "lint:fix": "eslint . --fix && bun run pretty",
+    "pretty": "prettier . --write",
+    "prepare": "husky"
   },
   "engines": {
     "node": ">=8.6.0"
@@ -17,6 +30,7 @@
   "author": "CosmoCreeper",
   "keywords": [
     "bun",
+    "deno",
     "pnpm",
     "yarn",
     "npm",
@@ -24,12 +38,10 @@
     "command"
   ],
   "bin": {
-    "allpm": "bin/index.js"
+    "allpm": "./dist/bin/index.js"
   },
-  "main": "index.js",
   "files": [
-    "index.js",
-    "bin/"
+    "dist"
   ],
   "dependencies": {
     "cross-spawn": "^7.0.6",
@@ -38,9 +50,14 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@eslint/json": "^1.2.0",
+    "@eslint/markdown": "^8.0.1",
+    "@types/cross-spawn": "^6.0.6",
+    "bun-types": "^1.3.12",
     "eslint": "^10.2.0",
     "globals": "^17.4.0",
     "husky": "^9.1.7",
-    "prettier": "^3.8.2"
+    "prettier": "^3.8.2",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.58.2"
   }
 }
