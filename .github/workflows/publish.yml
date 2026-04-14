@@ -16,11 +16,16 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
       - run: bun install
       - run: bun lint
       - run: bun test
       - run: bun run build
-      - run: bun publish --no-git-checks
+      - run: npm publish --provenance --access public
         env:
-          NPM_CONFIG_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+          HUSKY: 0
       - run: bunx jsr publish
