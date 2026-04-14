@@ -7,6 +7,7 @@ import type { ChildProcess, SpawnSyncReturns } from "child_process";
 const cache = new Map<string, boolean>();
 let cachedClient: string | undefined;
 
+/** Clears allpm cache for detecting pkg manager installations */
 export const clearCache = (): void => {
   cache.clear();
   cachedClient = undefined;
@@ -47,10 +48,13 @@ function getPkgManager(): string {
 }
 
 type SpawnFn = {
+  /** Spawns a process asynchronously */
   (...args: string[]): ChildProcess;
+  /** Spawns a process synchronously */
   sync: (...args: string[]) => SpawnSyncReturns<Buffer>;
 };
 
+/** Allows spawning processes with the appropriate pkg manager */
 export const spawn: SpawnFn = Object.assign(
   (...args: string[]): ChildProcess => crossSpawn(getPkgManager(), args),
   {
@@ -59,12 +63,21 @@ export const spawn: SpawnFn = Object.assign(
 );
 
 type AllPm = typeof getPkgManager & {
+  /** Return true if the user has bun */
   hasBun: () => boolean;
+  /** Return true if the user has deno */
   hasDeno: () => boolean;
+  /** Return true if the user has pnpm */
   hasPnpm: () => boolean;
+  /** Return true if the user has yarn */
   hasYarn: () => boolean;
+  /** Return true if the user has npm */
   hasNpm: () => boolean;
+
+  /** Process spawning API */
   spawn: SpawnFn;
+
+  /** Clears allpm cache */
   clearCache: () => void;
 };
 
@@ -77,6 +90,7 @@ const allpm: AllPm = Object.assign(getPkgManager, {
   spawn,
   clearCache,
 });
+
 
 export const hasBun: () => boolean = allpm.hasBun;
 export const hasDeno: () => boolean = allpm.hasDeno;
