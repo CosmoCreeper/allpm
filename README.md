@@ -1,6 +1,7 @@
 # allpm
 
 Execute scripts with bun, deno, pnpm, yarn, or npm.
+[GitHub](https://github.com/CosmoCreeper/allpm) | [NPM](https://npmjs.com/allpm) | [JSR](https://jsr.io/@cosmon/allpm)
 
 ```sh
 bun install -d allpm
