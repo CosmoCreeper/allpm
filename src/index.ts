@@ -1,8 +1,8 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import crossSpawn from "cross-spawn";
 import { packageDirectorySync } from "package-directory";
-import type { ChildProcess, SpawnSyncReturns } from "child_process";
+import type { ChildProcess, SpawnSyncReturns } from "node:child_process";
 
 const cache = new Map<string, boolean>();
 let cachedClient: string | undefined;
@@ -47,7 +47,8 @@ function getPkgManager(): string {
   return (cachedClient = ["bun", "deno", "pnpm", "yarn"].find(hasManager) ?? "npm");
 }
 
-type SpawnFn = {
+/** Spawn API */
+export type SpawnFn = {
   /** Spawns a process asynchronously */
   (...args: string[]): ChildProcess;
   /** Spawns a process synchronously */
@@ -62,7 +63,11 @@ export const spawn: SpawnFn = Object.assign(
   }
 );
 
-type AllPm = typeof getPkgManager & {
+/** Default typing for the allpm default exports */
+export type AllPm = {
+  /** Returns the detected package manager name */
+  (): string;
+
   /** Return true if the user has bun */
   hasBun: () => boolean;
   /** Return true if the user has deno */
@@ -81,7 +86,8 @@ type AllPm = typeof getPkgManager & {
   clearCache: () => void;
 };
 
-const allpm: AllPm = Object.assign(getPkgManager, {
+/** Default exports */
+const allpm = Object.assign(getPkgManager, {
   hasBun: (): boolean => hasManager("bun"),
   hasDeno: (): boolean => hasManager("deno"),
   hasPnpm: (): boolean => hasManager("pnpm"),
@@ -89,11 +95,17 @@ const allpm: AllPm = Object.assign(getPkgManager, {
   hasNpm: (): boolean => hasManager("npm"),
   spawn,
   clearCache,
-});
+}) as AllPm;
 
+/** Returns true if bun is installed */
 export const hasBun: () => boolean = allpm.hasBun;
+/** Returns true if deno is installed */
 export const hasDeno: () => boolean = allpm.hasDeno;
+/** Returns true if pnpm is installed */
 export const hasPnpm: () => boolean = allpm.hasPnpm;
+/** Returns true if yarn is installed */
 export const hasYarn: () => boolean = allpm.hasYarn;
+/** Returns true if npm is installed */
 export const hasNpm: () => boolean = allpm.hasNpm;
+
 export default allpm;
