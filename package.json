@@ -18,7 +18,7 @@
     "lint": "eslint . && prettier . --check --cache",
     "lint:fix": "eslint . --fix && bun run pretty",
     "pretty": "prettier . --write",
-    "prepare": "husky"
+    "prepare": "husky || true"
   },
   "engines": {
     "node": ">=8.6.0"
