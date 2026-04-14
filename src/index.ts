@@ -91,7 +91,6 @@ const allpm: AllPm = Object.assign(getPkgManager, {
   clearCache,
 });
 
-
 export const hasBun: () => boolean = allpm.hasBun;
 export const hasDeno: () => boolean = allpm.hasDeno;
 export const hasPnpm: () => boolean = allpm.hasPnpm;
